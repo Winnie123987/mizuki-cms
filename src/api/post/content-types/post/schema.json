@@ -1,0 +1,100 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "singularName": "post",
+    "pluralName": "posts",
+    "displayName": "文章",
+    "description": "博客文章内容模型"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 255
+    },
+    "published": {
+      "type": "date",
+      "required": true
+    },
+    "updated": {
+      "type": "date"
+    },
+    "draft": {
+      "type": "boolean",
+      "default": false
+    },
+    "description": {
+      "type": "text",
+      "maxLength": 1000
+    },
+    "image": {
+      "allowedTypes": ["images"],
+      "type": "media",
+      "multiple": false
+    },
+    "tags": {
+      "type": "json",
+      "default": []
+    },
+    "category": {
+      "type": "string"
+    },
+    "lang": {
+      "type": "string",
+      "default": ""
+    },
+    "pinned": {
+      "type": "boolean",
+      "default": false
+    },
+    "comment": {
+      "type": "boolean",
+      "default": true
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "author": {
+      "type": "string"
+    },
+    "sourceLink": {
+      "type": "string"
+    },
+    "licenseName": {
+      "type": "string"
+    },
+    "licenseUrl": {
+      "type": "string"
+    },
+    "encrypted": {
+      "type": "boolean",
+      "default": false
+    },
+    "password": {
+      "type": "string"
+    },
+    "passwordHint": {
+      "type": "string"
+    },
+    "alias": {
+      "type": "string"
+    },
+    "permalink": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    }
+  }
+}
