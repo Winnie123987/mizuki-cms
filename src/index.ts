@@ -1,3 +1,8 @@
+import dns from 'node:dns';
+
+// 强制优先使用 IPv4，解决 Render 免费实例无法连接 IPv6 数据库的问题
+dns.setDefaultResultOrder('ipv4first');
+
 // import type { Core } from '@strapi/strapi';
 
 export default {
