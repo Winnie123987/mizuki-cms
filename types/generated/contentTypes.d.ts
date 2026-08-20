@@ -443,11 +443,41 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDiaryDiary extends Struct.CollectionTypeSchema {
+  collectionName: 'diaries';
+  info: {
+    displayName: 'diary';
+    pluralName: 'diaries';
+    singularName: 'diary';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Text & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    images: Schema.Attribute.Media<'images' | 'files', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::diary.diary'> &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String;
+    mood: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    tags: Schema.Attribute.JSON;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiPostPost extends Struct.CollectionTypeSchema {
   collectionName: 'posts';
   info: {
     description: '\u535A\u5BA2\u6587\u7AE0\u5185\u5BB9\u6A21\u578B';
-    displayName: '\u6587\u7AE0';
+    displayName: 'post';
     pluralName: 'posts';
     singularName: 'post';
   };
@@ -470,7 +500,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     draft: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     encrypted: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     image: Schema.Attribute.Media<'images'>;
-    lang: Schema.Attribute.String & Schema.Attribute.DefaultTo<''>;
+    lang: Schema.Attribute.String;
     licenseName: Schema.Attribute.String;
     licenseUrl: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -490,7 +520,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
         maxLength: 255;
       }>;
     sourceLink: Schema.Attribute.String;
-    tags: Schema.Attribute.JSON & Schema.Attribute.DefaultTo<[]>;
+    tags: Schema.Attribute.JSON;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -1014,6 +1044,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::diary.diary': ApiDiaryDiary;
       'api::post.post': ApiPostPost;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
